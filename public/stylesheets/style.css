@@ -6,3 +6,75 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+body {
+	background-color: #000000;
+	
+}
+a {
+	color: #ffffff;
+}
+#text{
+	position: absolute;
+	z-index: 2;
+	top:130px;
+	right:10px;
+	opacity: 0.5;
+	width:200px;
+	height:30px;
+	font-size: 25px;
+}
+#submit{
+	position: absolute;
+	z-index: 3;
+	top:50px;
+	right:10px;
+	opacity: 0.5;
+	width:80px;
+	height:30px;
+	font-size: 15px;
+}
+#container{
+	position:absolute;
+	top: 0px;
+	left:0px;
+	z-index: -1;
+}
+#title{
+	position:absolute;
+	z-index: 1;
+	right: 0px;
+	top: 0px;
+	width: 220px;
+	height:220px;
+	color: white;
+	padding-right:10px;
+	font-family: Helvetica,monospace;
+}
+#title p{
+	font-size: 50px;
+	padding-top: 0px;
+	padding-left:20px;
+	text-align: justify;
+}
+/*#progressBar{
+	width:1000px;
+}*/
+#progress{
+	margin-top: 200px;
+	padding-top: 30px;
+}
+
+.progress-label {
+    float: left;
+    margin-left: 50%;
+    margin-top: 5px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+/*#loading{
+	position: absolute;
+	left 50%;
+}*/

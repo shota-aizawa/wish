@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)http://mrdoob.github.io/three.js/examples/webgl_panorama_equirectangular.html -->
+<html lang="en" style="visibility: visible;">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet.css" href="/stylesheets/style.css" type="text/css">
+		<title>make a wish by twitter</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<!-- your server info -->
+		<script src="//192.168.1.140:8000/socket.io/socket.io.js" type="text/javascript"></script>
+		<!--<script src="js/jquery.js" type="text/javascript"></script>
+		 <script src="js/three.min.js"></script> 
+		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script src="http://localhost:8000/node_modules/socket.io/node_modules/socket.io_client/socket.io.js"></script>
+		
+
+<script>
+var socket;
+// var red,blue,green;
+// var longitude;
+var url='localhost';
+var port=8000
+//var url='http//47.18.216.182';
+// $(document).ready(function(){
+ 	// socket = io.connect(url+':'+port);
+	// socket.on('toScreen', function (data) {
+	// 	console.log(data);
+	// 	document.getElementById("r_space").innerHTML = data.r;
+	// document.getElementById("g_space").innerHTML = data.g;
+	// document.getElementById("b_space").innerHTML = data.b;
+	// 	red = data.r;
+	// 	blue = data.g;
+	// 	green = data.b;
+	// 	document.body.style.backgroundColor = 'rgb(' + data.r + ',' + data.g + ',' + data.b + ')';
+	// });
+// });
+
+//When color button is clicked emit data to socket
+// function toColor(){
+// 	var rval = document.getElementById('rval').value;
+// 	var gval = document.getElementById('gval').value;
+// 	var bval = document.getElementById('bval').value;
+// 	socket.emit('toColor', { r: rval, g: gval, b:bval });
+
+// var imageSet1 = 
+// 		[
+// 			"/images/01.jpg",
+// 			"/images/09.jpg",
+// 			"/images/17.jpg",
+// 			"/images/25.jpg",
+// 			"/images/33.jpg",
+// 			"/images/41.jpg",
+// 			"/images/49.jpg",
+// 			"/images/57.jpg",
+// 			"/images/65.jpg",
+// 			"/images/73.jpg",
+// 			"/images/81.jpg"
+// 		]
+
+// var now_image_count1 = 0;
+		
+
+$(function(){
+
+	// make a progress bar
+	$("#progress").progressbar({
+		value: false,
+		max: 88,
+		change: function () {
+              $(".progress-label").text($("#progress").progressbar("value") + "/88");
+          },
+        complete: function () {
+              $(".progress-label").text("Complete!");
+          }	
+		});
+
+		function progress() {
+          var val = $("#progress").progressbar("value") || 0;
+
+          $("#progress").progressbar("value", val + 1);
+
+          if (val < 88) {
+              setTimeout(progress, 500);
+          };
+      };
+
+      setTimeout(progress, 3000);
+
+	
+	$("#progress").css('width',"1225px");
+	
+
+	 // function displayPictures(){
+		 
+
+		
+
+		// $("#image-box1").attr('src', imageSet1[now_image_count1]);
+		 	
+		// $("#image-box1").click(function(){
+
+			// var value = $("#progress").getAttribute("aria-valuenow");
+
+
+			// if(value > 20){
+				// if (now_image_count1 == imageSet1.length - 1){
+				// 	now_image_count1 = 0;
+				// } else {
+				// 	now_image_count1 ++;
+				// }
+					
+	 		// 	$("#image-box1").attr("src", imageSet1[now_image_count1]);
+	 	// 	$("#image-box1").attr("src", "/images/09.jpg");
+	 	
+	 	// };
+	 				
+	 			// });	
+		 	 // else{
+
+		 	 // };	
+			
+		
+
+	 // };
+
+		
+
+});
+
+
+
+
+</script>
+		
+	</head>
+	<body>
+		<!-- <div id="container"></div>
+		<div id="r_space"><p></p></div>
+		<div id="g_space"><p></p></div>
+		<div id="b_space"><p></p></div>
+		
+		<form>
+			<input id="rval" type="text" name="rval" placeholder="rval">
+			<input id="gval" type="text" name="gval" placeholder="gval">
+			<input id="bval" type="text" name="bval" placeholder="bval">
+			<input onclick="toColor()" id="submit" type="button" value="color">
+		</form>	 -->
+		<div id="title"><p>Your Pilgrimage</p></div>
+
+		<table border>
+		<tr>
+		<td ><img src="/images/01.jpg" id="image-box1" /></td>
+		<td ><img src="/images/02.jpg" id="image-box2" /></td>
+		<td ><img src="/images/03.jpg" id="image-box3" /></td>
+		<td ><img src="/images/04.jpg" id="image-box4" /></td>
+		</tr>
+		<tr>
+		<td ><img src="/images/05.jpg" id="image-box5" /></td>
+		<td ><img src="/images/06.jpg" id="image-box6" /></td>
+		<td ><img src="/images/07.jpg" id="image-box7" /></td>
+		<td ><img src="/images/08.jpg" id="image-box8" /></td>
+		</tr>
+		</table>
+
+
+		<!-- <img src="/images/shikoku.gif"> -->
+		<!-- <div id="progressBar">
+		<progress value="40" max="88">40/88</progress>
+		</div> -->
+		<div id="progress">
+			<!-- <div class="progressLabel"> -->
+					<div class='progress-label'>Progress...</div>
+			<!-- </div> -->
+		</div>
+		<script>
+			
+			
+		</script>
+	</body>
+</html>
