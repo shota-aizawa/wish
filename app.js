@@ -38,6 +38,42 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// app.get('/age', function(request, response){
+
+//     //run function to fetch from parse
+//     //do math to get age
+//     ageArray = [];
+//     age = 0;
+
+//     function addAges(ageArray){
+//       for (var i = 0; i < array.length; i++){
+//         age + array[i];
+//       }
+//       return age;
+//     }
+
+//     Parse.Object.fetchAll([], {
+//         success: function(list) {
+//           appParse.find('Students', { "age":data} , function (err, response){
+//               for (entry in list) {
+//                 ageArray.push(entry.age);
+//                 addAges(ageArray);
+//               };
+//         socket.emit('toScreen',{ ParseData: response });    
+
+//         }); 
+          
+
+//         },
+//         error: function(error) {
+//           // An error occurred while fetching one of the objects.
+//           console.log('error to extract data');
+//         },
+//       });  
+
+//     res.write(age);
+// })
+
 // error handlers
 
 // development error handler
@@ -65,16 +101,21 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-http.createServer(app).listen(app.get('port'), function(){
+// http.createServer(app).listen(app.get('port'), function(){
+//   console.log('Express server listening on port ' + app.get('port'));
+// });
+// var io = require("socket.io").listen(http.createServer(app));
+
+var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+var io = require("socket.io").listen(server);
 
 
 // var server = app.listen('port');
 // var io = require("socket.io").listen(server);
 
-// var server = http.createServer(app).listen(app.get('port'));
- var io = require("socket.io").listen(http.createServer(app));
 
 // var bodyParser = require('body-parser');
 // var express = require("express");
@@ -90,20 +131,24 @@ http.createServer(app).listen(app.get('port'), function(){
 
 
 //socket.io stuff
-io.sockets.on('connection', function (socket) {
-  socket.on('toColor', function (data) {
-    console.log(data);
-    console.log("You sent R=" + data.r + " G="+ data.g + " B="+ data.g);
-    socket.emit('toScreen', { r: data.r, g: data.g, b: data.b });     
+// io.sockets.on('connection', function (socket) {
+//   socket.on('toColor', function (data) {
+//     console.log(data);
+//     console.log("You sent R=" + data.r + " G="+ data.g + " B="+ data.g);
+//     socket.emit('toScreen', { r: data.r, g: data.g, b: data.b });     
 
-  });
-});
+//   });
+// });
 
 var twitter = require('twitter');
 var Parse = require('node-parse-api').Parse;
 var APP_ID = "jr3y6s5boZKmSNc5PTN5xnlBjS8n9LxUAFKoHPxj";
 var MASTER_KEY = "rMYR8PJXpWfsmqXeslG3ZZ7QOsx6o7DKtCEwwGtb";
 var appParse = new Parse(APP_ID, MASTER_KEY);
+
+var REST_API_KEY = "q1b0RCvSEojhma3UsGDSHJC0vLg79MWvVTG56Is1";
+var Kaiseki = require('Kaiseki');
+var kaiseki = new Kaiseki(APP_ID,REST_API_KEY );
 
 var client = new twitter({
   consumer_key:'4iY6utOFjvXVrqGn0WhVJKdy8',
@@ -123,25 +168,40 @@ client.stream('statuses/filter',{track: '@aizas549'},function(stream){
 
     var textCleaned = text.replace(/@aizas549/g,'');
     console.log(textCleaned);
+
+    appParse.find('Students','',function(err,response){
+                    console.log(response);
+                    
+    });
+
+    var params = {
+        count:true
+        };
+    kaiseki.getObjects('Students', params, function(err, res, body, success) {
+    
+    console.log('Total number1 = ', body.count);
+    });
+
+
   });
 });
 
 
-client.stream('statuses/filter',{follow: '3883509681'},function(stream){
+// client.stream('statuses/filter',{follow: '3883509681'},function(stream){
 
   
-  stream.on('data',function(data){
-      console.log(data);
-      if (retweeted == true || retweet_count > 0){
+//   stream.on('data',function(data){
+//       console.log(data);
+//       if (retweeted == true || retweet_count > 0){
         
-        appParse.insert('Students', { "age":4 }, function (err, response) {
-            console.log("entry made");
-          });
-  };
+//         appParse.insert('Students', { "age":4 }, function (err, response) {
+//             console.log("entry made");
+//           });
+//   };
 
     
-  });
-});
+//   });
+// });
 
 
 client.stream('user',function(stream){
@@ -151,25 +211,68 @@ client.stream('user',function(stream){
     appParse.insert('Students', { "age":2 }, function (err, response) {
             console.log("entry made");
     });
+
+    var params = {
+        count:true
+        };
+    kaiseki.getObjects('Students', params, function(err, res, body, success) {
+    
+    console.log('Total number2 = ', body.count);
+    });
+
   });
+
+
+
   stream.on('follow',function(event){
     console.log(event);
     appParse.insert('Students', { "age":3 }, function (err, response) {
             console.log("entry made");
     });
 
+
+    var params = {
+        count:true
+        };
+    kaiseki.getObjects('Students', params, function(err, res, body, success) {
+    
+    console.log('Total number3 = ', body.count);
+    });
+
   });
+
+
+
   stream.on('retweet',function(event){
     console.log(event);
     appParse.insert('Students', { "age":4 }, function (err, response) {
             console.log("entry made");
     });
 
+    var params = {
+        count:true
+        };
+    kaiseki.getObjects('Students', params, function(err, res, body, success) {
+    
+    console.log('Total number4 = ', body.count);
+    });
+
+
   });
+
+
   stream.on('list_member_added',function(event){
     console.log(event);
     appParse.insert('Students', { "age":5 }, function (err, response) {
             console.log("entry made");
+    });
+
+    var params = {
+        count:true
+        };
+    kaiseki.getObjects('Students', params, function(err, res, body, success) {
+    
+    console.log('Total number5 = ', body.count);
     });
 
   });
@@ -182,30 +285,92 @@ client.stream('user',function(stream){
 
   });
 
+  var params = {
+        count:true
+        };
+    kaiseki.getObjects('Students', params, function(err, res, body, success) {
+    
+    console.log('Total number = ', body.count);
+    });
 
 });
 
 io.sockets.on('connection', function (socket) {
   
 
-            // socket.on('sendToParse', function (data) {
-            //   console.log(data);
-            //   appParse.insert('Students', { firstName: data.firstName,lastName:data.lastName,age:data.age,pet:data.pet,drake:data.drake }, function (err, response) {
-            //   // console.log(response);
-            //   console.log("entry made");
-            // });
-            // });
+            socket.on('sendToParse', function (data) {
+              console.log(data);
+              appParse.insert('Students', { "age":data}, function (err, response) {
+              // console.log(response);
+              console.log("entry made");
+            });
+            });
 
 
           socket.on('getFromParse', function (data) {
-              appParse.find('Students', '', function (err, response) {
-            console.log(response);
-            socket.emit('toScreen',{ ParseData: response });
-          });
-             
+              
+                  console.log(data);
+
+                  appParse.find('Students','',function(err,response){
+                    console.log(response);
+
+                  // var query ={
+                  //   count: 1,
+                  //   limit:0
+                  // } ;
+                  // appParse.find('Students',query,function(error,response){
+
+                  // });
+
+                  var params = {
+                                count:true
+                      };
+                  kaiseki.getObjects('Students', params, function(err, res, body, success) {
+                  
+                  console.log('Total number of twitter activities = ', body.count);
+                  io.socket.emit('toScreen', {body.count});
+                  // socket.emit('toScreen', {ParseData: response});
+                  });
+
+
+                    // socket.emit('toScreen',{ ParseData: response });
+                  });
+                  // ageArray = [];
+                  // age = 0;
+
+                  // function addAges(ageArray){
+                  //   for (var i = 0; i < array.length; i++){
+                  //     age + array[i];
+                  //   }
+                  //   return age;
+                  // }
+
+                  // Parse.Object.fetchAll([ageArray], {
+                  //     success: function(list) {
+                  //       appParse.find('Students', { "age":data} , function (err, response){
+                  //           for (entry in list) {
+                  //             ageArray.push(entry.age);
+                  //             addAges(ageArray);
+                  //           };
+                  //     socket.emit('toScreen',{ ParseData: response });    
+
+                  //     }); 
+                        
+
+                  //     },
+                  //     error: function(error) {
+                  //       // An error occurred while fetching one of the objects.
+                  //       console.log('error to extract data');
+                  //     },
+                  //   });
+                  //        $.when(Parse.Object.fetch()).done(function() {
+                  //           return console.log("done");
+                  //       });
+
             });
 
 
 });
+
 
 

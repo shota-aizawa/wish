@@ -2,12 +2,12 @@
 <!-- saved from url=(0077)http://mrdoob.github.io/three.js/examples/webgl_panorama_equirectangular.html -->
 <html lang="en" style="visibility: visible;">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet.css" href="/stylesheets/style.css" type="text/css">
+		<link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
 		<title>make a wish by twitter</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<!-- your server info -->
-		<script src="//192.168.1.140:8000/socket.io/socket.io.js" type="text/javascript"></script>
+		
 		<!--<script src="js/jquery.js" type="text/javascript"></script>
 		 <script src="js/three.min.js"></script> 
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -15,21 +15,46 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-		<script src="http://localhost:8000/node_modules/socket.io/node_modules/socket.io_client/socket.io.js"></script>
 		
+		<!--
+		<script src="../node_modules/socket.io/node_modules/socket.io-client/socket.io.js" type="text/javascript"></script>
+		-->
+		<script src="socket.io/socket.io.js" type="text/javascript"></script>
 
 <script>
+
 var socket;
-// var red,blue,green;
-// var longitude;
+// // var red,blue,green;
+// // var longitude;
 var url='localhost';
 var port=8000
-//var url='http//47.18.216.182';
-// $(document).ready(function(){
- 	// socket = io.connect(url+':'+port);
-	// socket.on('toScreen', function (data) {
-	// 	console.log(data);
-	// 	document.getElementById("r_space").innerHTML = data.r;
+
+// $.get('/age', function(response){
+// 			console.log(response);
+// 		});
+
+//  $(document).ready(function(){
+ 	socket = io.connect(url+':'+port);
+
+ 	function fromParse(data){
+				console.log("Get data from Parse");
+				socket.emit('getFromParse', {});
+				
+			}
+
+	socket.on('toScreen', function (data) {
+		var num = Object.keys(data.ParseData.results).length;
+		console.log(num);
+	 	
+		// document.querySelector('h1').onclick = function(){
+		// document.getElementById("output_form").value = num;
+		document.getElementById("output").value = num;
+		// };
+	});
+
+
+
+	// document.getElementById("r_space").innerHTML = data.r;
 	// document.getElementById("g_space").innerHTML = data.g;
 	// document.getElementById("b_space").innerHTML = data.b;
 	// 	red = data.r;
@@ -46,47 +71,194 @@ var port=8000
 // 	var bval = document.getElementById('bval').value;
 // 	socket.emit('toColor', { r: rval, g: gval, b:bval });
 
-// var imageSet1 = 
-// 		[
-// 			"/images/01.jpg",
-// 			"/images/09.jpg",
-// 			"/images/17.jpg",
-// 			"/images/25.jpg",
-// 			"/images/33.jpg",
-// 			"/images/41.jpg",
-// 			"/images/49.jpg",
-// 			"/images/57.jpg",
-// 			"/images/65.jpg",
-// 			"/images/73.jpg",
-// 			"/images/81.jpg"
-// 		]
+var imageSet1 = 
+		[
+			"/images/01.jpg",
+			"/images/09.jpg",
+			"/images/17.jpg",
+			"/images/25.jpg",
+			"/images/33.jpg",
+			"/images/41.jpg",
+			"/images/49.jpg",
+			"/images/57.jpg",
+			"/images/65.jpg",
+			"/images/73.jpg",
+			"/images/81.jpg"
+		]
 
-// var now_image_count1 = 0;
+var imageSet2 = 
+		[
+			"/images/02.jpg",
+			"/images/10.jpg",
+			"/images/18.jpg",
+			"/images/26.jpg",
+			"/images/34.jpg",
+			"/images/42.jpg",
+			"/images/50.jpg",
+			"/images/58.jpg",
+			"/images/66.jpg",
+			"/images/74.jpg",
+			"/images/82.jpg"
+		]
+
+var imageSet3 = 
+		[
+			"/images/03.jpg",
+			"/images/11.jpg",
+			"/images/19.jpg",
+			"/images/27.jpg",
+			"/images/35.jpg",
+			"/images/43.jpg",
+			"/images/51.jpg",
+			"/images/59.jpg",
+			"/images/67.jpg",
+			"/images/75.jpg",
+			"/images/83.jpg"
+		]
+
+var imageSet4 = 
+		[
+			"/images/04.jpg",
+			"/images/12.jpg",
+			"/images/20.jpg",
+			"/images/28.jpg",
+			"/images/36.jpg",
+			"/images/44.jpg",
+			"/images/52.jpg",
+			"/images/60.jpg",
+			"/images/68.jpg",
+			"/images/76.jpg",
+			"/images/84.jpg"
+		]
+
+var imageSet5 = 
+		[
+			"/images/05.jpg",
+			"/images/13.jpg",
+			"/images/21.jpg",
+			"/images/29.jpg",
+			"/images/37.jpg",
+			"/images/45.jpg",
+			"/images/53.jpg",
+			"/images/61.jpg",
+			"/images/69.jpg",
+			"/images/77.jpg",
+			"/images/85.jpg"
+		]
+
+var imageSet6 = 
+		[
+			"/images/06.jpg",
+			"/images/14.jpg",
+			"/images/22.jpg",
+			"/images/30.jpg",
+			"/images/38.jpg",
+			"/images/46.jpg",
+			"/images/54.jpg",
+			"/images/62.jpg",
+			"/images/70.jpg",
+			"/images/78.jpg",
+			"/images/86.jpg"
+		]
+
+var imageSet7 = 
+		[
+			"/images/07.jpg",
+			"/images/15.jpg",
+			"/images/23.jpg",
+			"/images/31.jpg",
+			"/images/39.jpg",
+			"/images/47.jpg",
+			"/images/55.jpg",
+			"/images/63.jpg",
+			"/images/71.jpg",
+			"/images/79.jpg",
+			"/images/87.jpg"
+		]
+
+var imageSet8 = 
+		[
+			"/images/08.jpg",
+			"/images/16.jpg",
+			"/images/24.jpg",
+			"/images/32.jpg",
+			"/images/40.jpg",
+			"/images/48.jpg",
+			"/images/56.jpg",
+			"/images/64.jpg",
+			"/images/72.jpg",
+			"/images/80.jpg",
+			"/images/88.jpg"
+		]
+
+
+
+var now_image_count1 = 0;
+var now_image_count2 = 0;
+var now_image_count3 = 0;
+var now_image_count4 = 0;
+var now_image_count5 = 0;
+var now_image_count6 = 0;
+var now_image_count7 = 0;
+var now_image_count8 = 0;
 		
+
 
 $(function(){
 
 	// make a progress bar
 	$("#progress").progressbar({
-		value: false,
+		value: false ,
+		// var target = document.getElementById('output');
+		// value: target.value,
+
 		max: 88,
 		change: function () {
               $(".progress-label").text($("#progress").progressbar("value") + "/88");
           },
         complete: function () {
               $(".progress-label").text("Complete!");
-          }	
+          }
+
+
+
 		});
 
-		function progress() {
-          var val = $("#progress").progressbar("value") || 0;
+		// function onButtonClick(){
+		// 	var stepValue = document.getElementById('output').value;
+		// 	$("#progress").progressbar("option","value", stepValue);
 
-          $("#progress").progressbar("value", val + 1);
+		$("#show").click(function progress(){
+			var element = document.getElementById('output')
+			var stepValue = element.value;
+			console.log(stepValue);
+			
 
-          if (val < 88) {
-              setTimeout(progress, 500);
-          };
-      };
+			// var barValue = $("#progress").progressbar("value")|| 0
+		 	// $("#progress").progressbar("value", barValue);
+		 	// if (stepValue > 0){
+		 		$("#progress").progressbar("option","value", Number(stepValue) );
+		 		// $("#progress").changePercentValue(stepValue);
+		 		 setTimeout(progress, 500);
+		 	// }
+
+
+		});
+
+		// };
+
+		// function progress() {
+  //         var val = $("#progress").progressbar("value") || 0;
+
+  //         $("#progress").progressbar("value", val + 1);
+          
+  //         $("#progress").css({'color':'orange'});
+
+  //         if (val < 88) {
+  //             setTimeout(progress, 500);
+
+  //         };
+  //     };
 
       setTimeout(progress, 3000);
 
@@ -94,41 +266,83 @@ $(function(){
 	$("#progress").css('width',"1225px");
 	
 
-	 // function displayPictures(){
+	 
 		 
-
-		
 
 		// $("#image-box1").attr('src', imageSet1[now_image_count1]);
 		 	
 		// $("#image-box1").click(function(){
 
-			// var value = $("#progress").getAttribute("aria-valuenow");
+		// 	var value = $("#progress").getAttribute("aria-valuenow");
 
 
-			// if(value > 20){
-				// if (now_image_count1 == imageSet1.length - 1){
-				// 	now_image_count1 = 0;
-				// } else {
-				// 	now_image_count1 ++;
-				// }
+		// 	if(value > 20){
+		// 		if (now_image_count1 == imageSet1.length - 1){
+		// 			now_image_count1 = 0;
+		// 		} else {
+		// 			now_image_count1 ++;
+		// 		}
 					
-	 		// 	$("#image-box1").attr("src", imageSet1[now_image_count1]);
-	 	// 	$("#image-box1").attr("src", "/images/09.jpg");
+	 // 			$("#image-box1").attr("src", imageSet1[now_image_count1]);
+	 // 		$("#image-box1").attr("src", "/images/09.jpg");
 	 	
-	 	// };
+	 // 		};
 	 				
-	 			// });	
-		 	 // else{
+	 // 	});	
+		 	 		
 
-		 	 // };	
+	 $("#image-box1").click(function(){
+
+			now_image_count1++;
+			$("#image-box1").attr("src", imageSet1[now_image_count1]);
 			
+	 });
+	 $("#image-box2").click(function(){
+
+			now_image_count2++;
+			$("#image-box2").attr("src", imageSet2[now_image_count2]);
+			
+	 });	
+	 $("#image-box3").click(function(){
+
+			now_image_count3++;
+			$("#image-box3").attr("src", imageSet3[now_image_count3]);
+			
+	 });
+	 $("#image-box4").click(function(){
+
+			now_image_count4++;
+			$("#image-box4").attr("src", imageSet4[now_image_count4]);
+			
+	 });
+	 $("#image-box5").click(function(){
+
+			now_image_count5++;
+			$("#image-box5").attr("src", imageSet5[now_image_count5]);
+			
+	 });
+	 $("#image-box6").click(function(){
+
+			now_image_count6++;
+			$("#image-box6").attr("src", imageSet6[now_image_count6]);
+			
+	 });
+	 $("#image-box7").click(function(){
+
+			now_image_count7++;
+			$("#image-box7").attr("src", imageSet7[now_image_count7]);
+			
+	 });
+	 $("#image-box8").click(function(){
+
+			now_image_count8++;
+			$("#image-box8").attr("src", imageSet8[now_image_count8]);
+			
+	 });
+
+
+	 
 		
-
-	 // };
-
-		
-
 });
 
 
@@ -149,7 +363,9 @@ $(function(){
 			<input id="bval" type="text" name="bval" placeholder="bval">
 			<input onclick="toColor()" id="submit" type="button" value="color">
 		</form>	 -->
-		<div id="title"><p>Your Pilgrimage</p></div>
+		<h1 id="title">Your Pilgrimage</h1>
+		
+		
 
 		<table border>
 		<tr>
@@ -171,6 +387,13 @@ $(function(){
 		<!-- <div id="progressBar">
 		<progress value="40" max="88">40/88</progress>
 		</div> -->
+
+		<div id="button" onclick="fromParse()">Get Your Points</div>
+		<form name="form1" id="output_form">
+		<input name="textBox1" id="output" type="text"></div>
+		</form>
+		<div id="show" > Show Journey </div>
+
 		<div id="progress">
 			<!-- <div class="progressLabel"> -->
 					<div class='progress-label'>Progress...</div>

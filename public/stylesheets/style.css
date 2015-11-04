@@ -3,18 +3,13 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
-}
 
 
 body {
 	background-color: #000000;
 	
 }
-a {
-	color: #ffffff;
-}
+
 #text{
 	position: absolute;
 	z-index: 2;
@@ -25,16 +20,7 @@ a {
 	height:30px;
 	font-size: 25px;
 }
-#submit{
-	position: absolute;
-	z-index: 3;
-	top:50px;
-	right:10px;
-	opacity: 0.5;
-	width:80px;
-	height:30px;
-	font-size: 15px;
-}
+
 #container{
 	position:absolute;
 	top: 0px;
@@ -46,24 +32,27 @@ a {
 	z-index: 1;
 	right: 0px;
 	top: 0px;
-	width: 220px;
+	text-align: left;
+	width: 300px;
 	height:220px;
 	color: white;
 	padding-right:10px;
-	font-family: Helvetica,monospace;
+	font-family: Helvetica,Arial;
 }
 #title p{
 	font-size: 50px;
 	padding-top: 0px;
 	padding-left:20px;
-	text-align: justify;
 }
+
+
 /*#progressBar{
 	width:1000px;
 }*/
 #progress{
-	margin-top: 200px;
-	padding-top: 30px;
+	margin-top: 120px;
+	
+	background-color: orange;
 }
 
 .progress-label {
@@ -72,6 +61,55 @@ a {
     margin-top: 5px;
     font-weight: bold;
     text-shadow: 1px 1px 0 #fff;
+}
+
+#button {
+			position: absolute;
+			float:left;
+			width: 120px; 
+			margin: 5px;
+			border:10px; 
+			height: 30px; 
+			padding-top: 10px;
+			border-color: green;
+			background-color: green;
+			text-align: center; 
+			color: white;
+			z-index: 1
+		}
+#output_form{
+		position: absolute;
+			float:center;
+			clear:left;
+			width:25px;
+			margin-left: 150px;
+			margin-top: 10px;
+}
+#output {
+			position: absolute;
+			float:center;
+			clear:left;
+			font-size:20px; 
+			width:50px;
+			padding-left: 5px;
+			margin: 100px, 0px, 0px, 200px;
+			color:green;
+			z-index: 2
+}
+#show{
+			position: absolute;
+			clear:left;
+			width: 120px; 
+			margin: 50px 5px;
+			border:10px; 
+			height: 30px; 
+			padding-top: 10px;
+			border-color: blue;
+			background-color: blue;
+			text-align: center; 
+			color: white;
+			z-index: 1
+
 }
 
 /*#loading{
