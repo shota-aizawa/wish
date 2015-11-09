@@ -155,7 +155,7 @@ var imageSet6 =
 			"/images/38.jpg",
 			"/images/46.jpg",
 			"/images/54.jpg",
-			"/images/62.jpg",
+			"/images/62.jpeg",
 			"/images/70.jpg",
 			"/images/78.jpg",
 			"/images/86.jpg"
@@ -228,18 +228,34 @@ $(function(){
 		// 	var stepValue = document.getElementById('output').value;
 		// 	$("#progress").progressbar("option","value", stepValue);
 
+		
+
 		$("#show").click(function progress(){
-			var element = document.getElementById('output')
-			var stepValue = element.value;
+			var element = document.getElementById('output').value;
+			var stepValue = Number(element);
 			console.log(stepValue);
 			
 
 			// var barValue = $("#progress").progressbar("value")|| 0
 		 	// $("#progress").progressbar("value", barValue);
 		 	// if (stepValue > 0){
-		 		$("#progress").progressbar("option","value", Number(stepValue) );
+		 		$("#progress").progressbar("option","value", stepValue );
 		 		// $("#progress").changePercentValue(stepValue);
-		 		 setTimeout(progress, 500);
+		 		
+		 		if(stepValue < 20){
+		 			$("#progress").css({'background':'gray'});
+		 		} else if(stepValue < 40){
+		 			$("#progress").css({'background':'yellow'});
+		 		} else if(stepValue < 60){
+		 			$("#progress").css({'background':'green'});
+		 		} else if(stepValue < 80){
+		 			$("#progress").css({'background':'orange'});
+		 		} else {
+		 			$("#progress").css({'background':'red'});
+		 		}
+
+
+		 		 setTimeout(progress, 300);
 		 	// }
 
 
@@ -260,7 +276,7 @@ $(function(){
   //         };
   //     };
 
-      setTimeout(progress, 3000);
+      setTimeout(progress, 2000);
 
 	
 	$("#progress").css('width',"1225px");
@@ -289,32 +305,46 @@ $(function(){
 	 // 		};
 	 				
 	 // 	});	
-		 	 		
+		 
+	
+	 		
 
 	 $("#image-box1").click(function(){
 
+	 		
 			now_image_count1++;
 			$("#image-box1").attr("src", imageSet1[now_image_count1]);
 			
 	 });
-	 $("#image-box2").click(function(){
+	
 
+	
+
+	 $("#image-box2").click(function(){
+	 		
 			now_image_count2++;
 			$("#image-box2").attr("src", imageSet2[now_image_count2]);
-			
+		
 	 });	
+
+	
+
 	 $("#image-box3").click(function(){
 
 			now_image_count3++;
 			$("#image-box3").attr("src", imageSet3[now_image_count3]);
 			
 	 });
+
 	 $("#image-box4").click(function(){
 
 			now_image_count4++;
 			$("#image-box4").attr("src", imageSet4[now_image_count4]);
 			
 	 });
+	 
+
+
 	 $("#image-box5").click(function(){
 
 			now_image_count5++;
@@ -340,7 +370,13 @@ $(function(){
 			
 	 });
 
-
+	 	window.twttr = (function (d,s,id) {
+		var t, js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+		js.src="https://platform.twitter.com/widgets.js";
+		fjs.parentNode.insertBefore(js, fjs);
+		return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+		}(document, "script", "twitter-wjs"));
 	 
 		
 });
@@ -396,9 +432,12 @@ $(function(){
 
 		<div id="progress">
 			<!-- <div class="progressLabel"> -->
-					<div class='progress-label'>Progress...</div>
+					<div class='progress-label'>Get Your Points and Show Your Journey!</div>
 			<!-- </div> -->
 		</div>
+
+		<a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm completing this journey!"　data-count="none" data-size="large" data-lang="en">Tweet</a>
+
 		<script>
 			
 			

@@ -38,41 +38,9 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// app.get('/age', function(request, response){
 
-//     //run function to fetch from parse
-//     //do math to get age
-//     ageArray = [];
-//     age = 0;
 
-//     function addAges(ageArray){
-//       for (var i = 0; i < array.length; i++){
-//         age + array[i];
-//       }
-//       return age;
-//     }
 
-//     Parse.Object.fetchAll([], {
-//         success: function(list) {
-//           appParse.find('Students', { "age":data} , function (err, response){
-//               for (entry in list) {
-//                 ageArray.push(entry.age);
-//                 addAges(ageArray);
-//               };
-//         socket.emit('toScreen',{ ParseData: response });    
-
-//         }); 
-          
-
-//         },
-//         error: function(error) {
-//           // An error occurred while fetching one of the objects.
-//           console.log('error to extract data');
-//         },
-//       });  
-
-//     res.write(age);
-// })
 
 // error handlers
 
@@ -101,10 +69,7 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-// http.createServer(app).listen(app.get('port'), function(){
-//   console.log('Express server listening on port ' + app.get('port'));
-// });
-// var io = require("socket.io").listen(http.createServer(app));
+
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
@@ -113,32 +78,9 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 var io = require("socket.io").listen(server);
 
 
-// var server = app.listen('port');
-// var io = require("socket.io").listen(server);
+var GPIO = require('onoff').Gpio;
+var led = new GPIO(17, 'out');
 
-
-// var bodyParser = require('body-parser');
-// var express = require("express");
-// var app = express();
-// var port = 8000;
-// var url='localhost'
-// var server = app.listen(port);
-// var io = require("socket.io").listen(server);
-
-// app.use(express.static(__dirname + '/'));
-// console.log('Simple static server listening at '+url+':'+port);
-
-
-
-//socket.io stuff
-// io.sockets.on('connection', function (socket) {
-//   socket.on('toColor', function (data) {
-//     console.log(data);
-//     console.log("You sent R=" + data.r + " G="+ data.g + " B="+ data.g);
-//     socket.emit('toScreen', { r: data.r, g: data.g, b: data.b });     
-
-//   });
-// });
 
 var twitter = require('twitter');
 var Parse = require('node-parse-api').Parse;
@@ -147,7 +89,7 @@ var MASTER_KEY = "rMYR8PJXpWfsmqXeslG3ZZ7QOsx6o7DKtCEwwGtb";
 var appParse = new Parse(APP_ID, MASTER_KEY);
 
 var REST_API_KEY = "q1b0RCvSEojhma3UsGDSHJC0vLg79MWvVTG56Is1";
-var Kaiseki = require('Kaiseki');
+var Kaiseki = require('kaiseki');
 var kaiseki = new Kaiseki(APP_ID,REST_API_KEY );
 
 var client = new twitter({
@@ -164,10 +106,16 @@ client.stream('statuses/filter',{track: '@aizas549'},function(stream){
     var text = data.text;
         appParse.insert('Students', { "age":1 }, function (err, response) {
             console.log("entry made");
-  });
+        });
 
     var textCleaned = text.replace(/@aizas549/g,'');
     console.log(textCleaned);
+
+    
+    led.writeSync(1);
+    
+
+  
 
     appParse.find('Students','',function(err,response){
                     console.log(response);
@@ -179,8 +127,9 @@ client.stream('statuses/filter',{track: '@aizas549'},function(stream){
         };
     kaiseki.getObjects('Students', params, function(err, res, body, success) {
     
-    console.log('Total number1 = ', body.count);
+    console.log('Total number1 = ', body.count+1);
     });
+        
 
 
   });
@@ -212,12 +161,14 @@ client.stream('user',function(stream){
             console.log("entry made");
     });
 
+    led.writeSync(1);
+
     var params = {
         count:true
         };
     kaiseki.getObjects('Students', params, function(err, res, body, success) {
     
-    console.log('Total number2 = ', body.count);
+    console.log('Total number2 = ', body.count+1);
     });
 
   });
@@ -230,13 +181,14 @@ client.stream('user',function(stream){
             console.log("entry made");
     });
 
+    led.writeSync(1);
 
     var params = {
         count:true
         };
     kaiseki.getObjects('Students', params, function(err, res, body, success) {
     
-    console.log('Total number3 = ', body.count);
+    console.log('Total number3 = ', body.count+1);
     });
 
   });
@@ -249,12 +201,14 @@ client.stream('user',function(stream){
             console.log("entry made");
     });
 
+    led.writeSync(1);
+
     var params = {
         count:true
         };
     kaiseki.getObjects('Students', params, function(err, res, body, success) {
     
-    console.log('Total number4 = ', body.count);
+    console.log('Total number4 = ', body.count+1);
     });
 
 
@@ -267,12 +221,14 @@ client.stream('user',function(stream){
             console.log("entry made");
     });
 
+    led.writeSync(1);
+
     var params = {
         count:true
         };
     kaiseki.getObjects('Students', params, function(err, res, body, success) {
     
-    console.log('Total number5 = ', body.count);
+    console.log('Total number5 = ', body.count+1);
     });
 
   });
@@ -282,6 +238,16 @@ client.stream('user',function(stream){
     appParse.insert('Students', { "age":6 }, function (err, response) {
             console.log("entry made");
     });
+
+    var params = {
+        count:true
+        };
+    kaiseki.getObjects('Students', params, function(err, res, body, success) {
+    
+    console.log('Total number6 = ', body.count);
+    });
+
+    led.writeSync(1);
 
   });
 
@@ -314,13 +280,7 @@ io.sockets.on('connection', function (socket) {
                   appParse.find('Students','',function(err,response){
                     console.log(response);
 
-                  // var query ={
-                  //   count: 1,
-                  //   limit:0
-                  // } ;
-                  // appParse.find('Students',query,function(error,response){
-
-                  // });
+                  
 
                   var params = {
                                 count:true
@@ -328,7 +288,7 @@ io.sockets.on('connection', function (socket) {
                   kaiseki.getObjects('Students', params, function(err, res, body, success) {
                   
                   console.log('Total number of twitter activities = ', body.count);
-                  io.socket.emit('toScreen', {body.count});
+                  socket.emit('toScreen', {ParseData: response});
                   // socket.emit('toScreen', {ParseData: response});
                   });
 
