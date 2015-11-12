@@ -83,15 +83,15 @@ var APP_ID = "";
 var MASTER_KEY = "";
 var appParse = new Parse(APP_ID, MASTER_KEY);
 
-var REST_API_KEY = "q1b0RCvSEojhma3UsGDSHJC0vLg79MWvVTG56Is1";
+var REST_API_KEY = "";
 var Kaiseki = require('kaiseki');
 var kaiseki = new Kaiseki(APP_ID,REST_API_KEY );
 
 var client = new twitter({
-  consumer_key:'4iY6utOFjvXVrqGn0WhVJKdy8',
-  consumer_secret:'ps5WUJCCG7Qhl34OigWi96vCJlRtpmRpddTsZRgYn8pib4fBPE',
-  access_token_key:'3883509681-omCwE1olKxSfsEksD1Tiw2y7JbFPVISq3I3Vs3d',
-  access_token_secret:'EnzKhluQDXaq6EhUgNkcZvOY4xNz23gN01sozgcEcnQiR'
+  consumer_key:'',
+  consumer_secret:'',
+  access_token_key:'',
+  access_token_secret:''
 
 });
 
