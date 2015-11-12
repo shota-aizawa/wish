@@ -6,33 +6,19 @@
 		<title>make a wish by twitter</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<!-- your server info -->
-		
-		<!--<script src="js/jquery.js" type="text/javascript"></script>
-		 <script src="js/three.min.js"></script> 
-		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-		
-		<!--
-		<script src="../node_modules/socket.io/node_modules/socket.io-client/socket.io.js" type="text/javascript"></script>
-		-->
 		<script src="socket.io/socket.io.js" type="text/javascript"></script>
 
 <script>
 
 var socket;
-// // var red,blue,green;
-// // var longitude;
-var url='localhost';
+//var url='localhost';
+var url = '192.168.0.6'
 var port=8000
 
-// $.get('/age', function(response){
-// 			console.log(response);
-// 		});
-
+// Set up socket.io
 //  $(document).ready(function(){
  	socket = io.connect(url+':'+port);
 
@@ -45,32 +31,54 @@ var port=8000
 	socket.on('toScreen', function (data) {
 		var num = Object.keys(data.ParseData.results).length;
 		console.log(num);
-	 	
-		// document.querySelector('h1').onclick = function(){
-		// document.getElementById("output_form").value = num;
 		document.getElementById("output").value = num;
 		// };
 	});
 
 
 
-	// document.getElementById("r_space").innerHTML = data.r;
-	// document.getElementById("g_space").innerHTML = data.g;
-	// document.getElementById("b_space").innerHTML = data.b;
-	// 	red = data.r;
-	// 	blue = data.g;
-	// 	green = data.b;
-	// 	document.body.style.backgroundColor = 'rgb(' + data.r + ',' + data.g + ',' + data.b + ')';
-	// });
-// });
+</script>
+		
+	</head>
+	<body>
+		
+		<h1 id="title">Your Pilgrimage</h1>
+		
 
-//When color button is clicked emit data to socket
-// function toColor(){
-// 	var rval = document.getElementById('rval').value;
-// 	var gval = document.getElementById('gval').value;
-// 	var bval = document.getElementById('bval').value;
-// 	socket.emit('toColor', { r: rval, g: gval, b:bval });
+		<table border>
+		<tr>
+		<td ><img src="/images/01.jpg" id="image-box1" /></td>
+		<td ><img src="/images/02.jpg" id="image-box2" /></td>
+		<td ><img src="/images/03.jpg" id="image-box3" /></td>
+		<td ><img src="/images/04.jpg" id="image-box4" /></td>
+		</tr>
+		<tr>
+		<td ><img src="/images/05.jpg" id="image-box5" /></td>
+		<td ><img src="/images/06.jpg" id="image-box6" /></td>
+		<td ><img src="/images/07.jpg" id="image-box7" /></td>
+		<td ><img src="/images/08.jpg" id="image-box8" /></td>
+		</tr>
+		</table>
 
+
+		<div id="button" onclick="fromParse()">Get Your Points</div>
+		<form name="form1" id="output_form">
+		<input name="textBox1" id="output" type="text"></div>
+		</form>
+		<div id="show" > Show Journey </div>
+
+		<div id="progress">
+			<!-- <div class="progressLabel"> -->
+					<div class='progress-label'>Get Your Points and Show Your Journey!</div>
+			<!-- </div> -->
+		</div>
+
+		<a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm completing this journey!"　data-count="none" data-size="large" data-lang="en">Tweet</a>
+
+		<script>
+			
+
+// Set up photos
 var imageSet1 = 
 		[
 			"/images/01.jpg",
@@ -191,8 +199,6 @@ var imageSet8 =
 			"/images/88.jpg"
 		]
 
-
-
 var now_image_count1 = 0;
 var now_image_count2 = 0;
 var now_image_count3 = 0;
@@ -202,7 +208,6 @@ var now_image_count6 = 0;
 var now_image_count7 = 0;
 var now_image_count8 = 0;
 		
-
 
 $(function(){
 
@@ -223,10 +228,6 @@ $(function(){
 
 
 		});
-
-		// function onButtonClick(){
-		// 	var stepValue = document.getElementById('output').value;
-		// 	$("#progress").progressbar("option","value", stepValue);
 
 		
 
@@ -277,13 +278,8 @@ $(function(){
   //     };
 
       setTimeout(progress, 2000);
-
 	
-	$("#progress").css('width',"1225px");
-	
-
-	 
-		 
+	$("#progress").css('width',"1225px");	 
 
 		// $("#image-box1").attr('src', imageSet1[now_image_count1]);
 		 	
@@ -305,9 +301,7 @@ $(function(){
 	 // 		};
 	 				
 	 // 	});	
-		 
-	
-	 		
+		 		
 
 	 $("#image-box1").click(function(){
 
@@ -318,8 +312,6 @@ $(function(){
 	 });
 	
 
-	
-
 	 $("#image-box2").click(function(){
 	 		
 			now_image_count2++;
@@ -327,7 +319,6 @@ $(function(){
 		
 	 });	
 
-	
 
 	 $("#image-box3").click(function(){
 
@@ -343,8 +334,6 @@ $(function(){
 			
 	 });
 	 
-
-
 	 $("#image-box5").click(function(){
 
 			now_image_count5++;
@@ -370,6 +359,7 @@ $(function(){
 			
 	 });
 
+// Install Twitter button
 	 	window.twttr = (function (d,s,id) {
 		var t, js, fjs = d.getElementsByTagName(s)[0];
 		if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
@@ -384,62 +374,6 @@ $(function(){
 
 
 
-</script>
-		
-	</head>
-	<body>
-		<!-- <div id="container"></div>
-		<div id="r_space"><p></p></div>
-		<div id="g_space"><p></p></div>
-		<div id="b_space"><p></p></div>
-		
-		<form>
-			<input id="rval" type="text" name="rval" placeholder="rval">
-			<input id="gval" type="text" name="gval" placeholder="gval">
-			<input id="bval" type="text" name="bval" placeholder="bval">
-			<input onclick="toColor()" id="submit" type="button" value="color">
-		</form>	 -->
-		<h1 id="title">Your Pilgrimage</h1>
-		
-		
-
-		<table border>
-		<tr>
-		<td ><img src="/images/01.jpg" id="image-box1" /></td>
-		<td ><img src="/images/02.jpg" id="image-box2" /></td>
-		<td ><img src="/images/03.jpg" id="image-box3" /></td>
-		<td ><img src="/images/04.jpg" id="image-box4" /></td>
-		</tr>
-		<tr>
-		<td ><img src="/images/05.jpg" id="image-box5" /></td>
-		<td ><img src="/images/06.jpg" id="image-box6" /></td>
-		<td ><img src="/images/07.jpg" id="image-box7" /></td>
-		<td ><img src="/images/08.jpg" id="image-box8" /></td>
-		</tr>
-		</table>
-
-
-		<!-- <img src="/images/shikoku.gif"> -->
-		<!-- <div id="progressBar">
-		<progress value="40" max="88">40/88</progress>
-		</div> -->
-
-		<div id="button" onclick="fromParse()">Get Your Points</div>
-		<form name="form1" id="output_form">
-		<input name="textBox1" id="output" type="text"></div>
-		</form>
-		<div id="show" > Show Journey </div>
-
-		<div id="progress">
-			<!-- <div class="progressLabel"> -->
-					<div class='progress-label'>Get Your Points and Show Your Journey!</div>
-			<!-- </div> -->
-		</div>
-
-		<a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm completing this journey!"　data-count="none" data-size="large" data-lang="en">Tweet</a>
-
-		<script>
-			
 			
 		</script>
 	</body>
