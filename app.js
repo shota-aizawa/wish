@@ -79,8 +79,8 @@ var led = new GPIO(17, 'out');
 // set up a streaming Twitter API and Parse 
 var twitter = require('twitter');
 var Parse = require('node-parse-api').Parse;
-var APP_ID = "jr3y6s5boZKmSNc5PTN5xnlBjS8n9LxUAFKoHPxj";
-var MASTER_KEY = "rMYR8PJXpWfsmqXeslG3ZZ7QOsx6o7DKtCEwwGtb";
+var APP_ID = "";
+var MASTER_KEY = "";
 var appParse = new Parse(APP_ID, MASTER_KEY);
 
 var REST_API_KEY = "q1b0RCvSEojhma3UsGDSHJC0vLg79MWvVTG56Is1";
